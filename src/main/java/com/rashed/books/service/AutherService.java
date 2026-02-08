@@ -1,35 +1,25 @@
 package com.rashed.books.service;
 
+import com.rashed.books.base.BaseRepository;
+import com.rashed.books.base.BaseService;
 import com.rashed.books.entity.Auther;
+import com.rashed.books.entity.Book;
 import com.rashed.books.repository.AutherRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class AutherService {
-    @Autowired
-    private AutherRepo autherRepo;
+public class AutherService extends BaseService<Auther> {
 
-    public Auther findById(Long id) {
-       return autherRepo.findById(id).orElse(null);
+    protected AutherService(BaseRepository<Auther> baseRepository) {
+        super(baseRepository);
     }
-    public List<Auther> findAll() {
-         return (List<Auther>) autherRepo.findAll();
-    }
-    public  Auther save(Auther auther) {
-        return autherRepo.save(auther);
-    }
-    public  List<Auther> saveAll(List<Auther> authers) {
-        return (List<Auther>) autherRepo.saveAll(authers);
-    }
+
+    @Override
     public Auther update(Auther auther) {
-        Auther existingAuther = autherRepo.findById(auther.getId()).orElse(null);
+        Auther existingAuther = super.findById(auther.getId());
         existingAuther.setName(auther.getName());
-        return autherRepo.save(existingAuther);
-    }
-    public void deleteById(Long id) {
-        autherRepo.deleteById(id);
+        return super.save(existingAuther);
     }
 }

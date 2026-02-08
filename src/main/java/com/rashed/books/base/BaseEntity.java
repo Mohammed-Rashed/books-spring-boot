@@ -1,4 +1,4 @@
-package com.rashed.books.entity;
+package com.rashed.books.base;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedBy;
@@ -15,7 +15,7 @@ public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String statusCode;
 
     @CreatedBy
     private String createdBy;
@@ -25,9 +25,19 @@ public abstract class BaseEntity {
 
     @LastModifiedBy
     private String lastModifiedBy;
-
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
+
+    public String getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
+    }
+
+
+
 
     public Long getId() {
         return id;
@@ -37,13 +47,7 @@ public abstract class BaseEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getCreatedBy() {
         return createdBy;

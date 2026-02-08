@@ -1,8 +1,8 @@
 package com.rashed.books.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.rashed.books.base.BaseEntity;
 import jakarta.persistence.*;
-import org.apache.catalina.User;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;

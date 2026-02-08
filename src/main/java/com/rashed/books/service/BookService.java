@@ -1,36 +1,27 @@
 package com.rashed.books.service;
 
+import com.rashed.books.base.BaseRepository;
+import com.rashed.books.base.BaseService;
 import com.rashed.books.entity.Book;
 import com.rashed.books.repository.BookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
-public class BookService {
-    @Autowired
-    private BookRepo bookRepo;
+public class BookService extends BaseService<Book> {
 
-    public Book findById(Long id) {
-        return bookRepo.findById(id).orElse(null);
+
+    protected BookService(BaseRepository<Book> baseRepository) {
+        super(baseRepository);
     }
-    public List<Book> findAll() {
-        return (List<Book>) bookRepo.findAll();
-    }
-    public  Book save(Book Book) {
-        return  bookRepo.save(Book);
-    }
-    public  List<Book> saveAll(List<Book> Book) {
-        return (List<Book>) bookRepo.saveAll(Book);
-    }
+
+    @Override
     public Book update(Book book) {
-        Book existingBook = bookRepo.findById(book.getId()).orElse(null);
+        Book existingBook = super.findById(book.getId());
         existingBook.setName(book.getName());
         existingBook.setPrice(book.getPrice());
-        return bookRepo.save(existingBook);
+        return super.save(existingBook);
     }
-    public void deleteById(Long id) {
-        bookRepo.deleteById(id);
-    }
+
 }
