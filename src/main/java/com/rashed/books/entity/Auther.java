@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,9 @@ public class Auther extends BaseEntity {
     @NotBlank
     private String name;
 
+//    @Pattern(regexp = "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
+//    private String ipAddress;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "auther")
     private List<Book> books=new ArrayList<>();
@@ -28,6 +32,14 @@ public class Auther extends BaseEntity {
     public List<Book> getBooks() {
         return books;
     }
+
+//    public String getIpAddress() {
+//        return ipAddress;
+//    }
+//
+//    public void setIpAddress(String ipAddress) {
+//        this.ipAddress = ipAddress;
+//    }
 
     public void setBooks(List<Book> books) {
         this.books = books;

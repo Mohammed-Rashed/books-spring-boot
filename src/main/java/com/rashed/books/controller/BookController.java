@@ -1,5 +1,6 @@
 package com.rashed.books.controller;
 
+import com.rashed.books.dto.BookDto;
 import com.rashed.books.entity.Book;
 import com.rashed.books.service.BookService;
 import jakarta.validation.Valid;
@@ -26,8 +27,19 @@ public class BookController {
         return ResponseEntity.ok(bookService.findById(id));
     }
     @PostMapping()
-    public  ResponseEntity<?> saveBook(@RequestBody @Valid List<Book> Book) {
-        return ResponseEntity.ok(bookService.saveAll(Book));
+    public  ResponseEntity<?> saveBook(@RequestBody @Valid List<BookDto> dtos) {
+        List<Book> books = dtos.stream()
+                .map(dto -> {
+                    Book book = new Book();
+                    book.setName(dto.getName());
+                    book.setPrice(dto.getPrice());
+                    book.setAuther(dto.getAuther());
+                    return book;
+                })
+                .toList();
+
+
+        return ResponseEntity.ok(bookService.saveAll(books));
     }
     @PutMapping()
     public ResponseEntity<?> update(@RequestBody @Valid Book Book) {

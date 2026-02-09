@@ -1,6 +1,7 @@
 package com.rashed.books.controller;
 
 import com.rashed.books.entity.Auther;
+import com.rashed.books.entity.Book;
 import com.rashed.books.repository.AutherRepo;
 import com.rashed.books.service.AutherService;
 import jakarta.validation.Valid;
@@ -28,8 +29,16 @@ public class AutherController {
         return ResponseEntity.ok(autherService.findById(id));
     }
     @PostMapping()
-    public  ResponseEntity<?> saveAuther(@RequestBody @Valid List<Auther> auther) {
-        return ResponseEntity.ok(autherService.saveAll(auther));
+    public  ResponseEntity<?> saveAuther(@RequestBody @Valid List<Auther> autherDtos) {
+        List<Auther> authers = autherDtos.stream()
+                .map(dto -> {
+                    Auther auther = new Auther();
+                    auther.setName(dto.getName());
+                    return auther;
+                })
+                .toList();
+
+        return ResponseEntity.ok(autherService.saveAll(authers));
     }
     @PutMapping()
     public ResponseEntity<?> update(@RequestBody @Valid Auther auther) {
