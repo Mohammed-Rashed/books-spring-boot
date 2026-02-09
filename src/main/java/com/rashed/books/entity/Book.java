@@ -3,6 +3,7 @@ package com.rashed.books.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.rashed.books.base.BaseEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -16,22 +17,17 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public class Book extends BaseEntity {
 
+    @NotNull(message = "Name cannot be null")
+    @NotEmpty
+    @NotBlank
     private String name;
+    @Min(value = 5)
+    @Max(value = 500)
     private double price;
 
-    @CreatedBy
-    private String createdBy;
-
-    @CreatedDate
-    private LocalDateTime createdDate;
-
-    @LastModifiedBy
-    private String lastModifiedBy;
-
-    @LastModifiedDate
-    private LocalDateTime lastModifiedDate;
 
 
+    @NotNull
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="auther_id", referencedColumnName = "id")

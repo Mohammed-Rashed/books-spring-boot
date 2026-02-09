@@ -2,6 +2,7 @@ package com.rashed.books.controller;
 
 import com.rashed.books.entity.Book;
 import com.rashed.books.service.BookService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,11 +26,11 @@ public class BookController {
         return ResponseEntity.ok(bookService.findById(id));
     }
     @PostMapping()
-    public  ResponseEntity<?> saveBook(@RequestBody List<Book> Book) {
+    public  ResponseEntity<?> saveBook(@RequestBody @Valid List<Book> Book) {
         return ResponseEntity.ok(bookService.saveAll(Book));
     }
     @PutMapping()
-    public ResponseEntity<?> update(@RequestBody Book Book) {
+    public ResponseEntity<?> update(@RequestBody @Valid Book Book) {
         return ResponseEntity.ok(bookService.save(Book));
     }
     @DeleteMapping("/{id}")

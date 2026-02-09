@@ -3,6 +3,9 @@ package com.rashed.books.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rashed.books.base.BaseEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +14,9 @@ import java.util.List;
 @Table(name="authers")
 public class Auther extends BaseEntity {
 
+    @NotNull
+    @NotEmpty
+    @NotBlank
     private String name;
 
     @JsonManagedReference

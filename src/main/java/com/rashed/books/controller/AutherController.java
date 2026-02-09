@@ -3,6 +3,7 @@ package com.rashed.books.controller;
 import com.rashed.books.entity.Auther;
 import com.rashed.books.repository.AutherRepo;
 import com.rashed.books.service.AutherService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -27,11 +28,11 @@ public class AutherController {
         return ResponseEntity.ok(autherService.findById(id));
     }
     @PostMapping()
-    public  ResponseEntity<?> saveAuther(@RequestBody List<Auther> auther) {
+    public  ResponseEntity<?> saveAuther(@RequestBody @Valid List<Auther> auther) {
         return ResponseEntity.ok(autherService.saveAll(auther));
     }
     @PutMapping()
-    public ResponseEntity<?> update(@RequestBody Auther auther) {
+    public ResponseEntity<?> update(@RequestBody @Valid Auther auther) {
         return ResponseEntity.ok(autherService.save(auther));
     }
     @DeleteMapping("/{id}")
