@@ -12,5 +12,5 @@ public interface BaseRepository<T extends BaseEntity> extends JpaRepository<T, L
     @Modifying
     @Transactional
     @Query("update #{#entityName} e set e.statusCode = :statusCode where e.id = :id")
-    void updateEntity(@Param("id") Long id,@Param("statusCode") String statusCode);
+    int updateStatus(@Param("id") Long id,@Param("statusCode") String statusCode);
 }

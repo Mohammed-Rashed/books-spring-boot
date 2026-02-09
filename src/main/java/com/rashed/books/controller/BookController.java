@@ -37,4 +37,12 @@ public class BookController {
         bookService.deleteById(id);
         return ResponseEntity.ok(null);
     }
+    @PutMapping("/{id}/status")
+    public ResponseEntity<?> updateStatus(@PathVariable Long id, @RequestParam String status) {
+        Book book = bookService.findById(id);
+        if (book == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(bookService.updateStatus(book.getId(),status));
+    }
 }

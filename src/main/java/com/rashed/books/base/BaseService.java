@@ -33,5 +33,8 @@ public abstract class BaseService<T extends BaseEntity> {
     public void deleteById(Long id) {
         baseRepository.deleteById(id);
     }
+    public int updateStatus(Long id,String statusCode) {
+       return baseRepository.updateStatus(id,statusCode);
+    }
 
 }
