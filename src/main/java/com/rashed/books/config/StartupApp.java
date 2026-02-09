@@ -25,23 +25,26 @@ public class StartupApp implements CommandLineRunner {
         System.out.println("BookService: " + bookService);
 
 
-        Auther auther = new Auther();
-        auther.setName("Rashed");
+        if(autherService.findAll().isEmpty()) {
+            Auther auther = new Auther();
+            auther.setName("Rashed");
 
-        Auther auther2 = new Auther();
-        auther2.setName("Asser");
-        autherService.saveAll(Arrays.asList(auther,auther2));
+            Auther auther2 = new Auther();
+            auther2.setName("Asser");
+            autherService.saveAll(Arrays.asList(auther,auther2));
 
-        Book book = new Book();
-        book.setName("Spring Boot in Action");
-        book.setPrice(29.99);
-        book.setAuther(autherService.findById(1L));
+            Book book = new Book();
+            book.setName("Spring Boot in Action");
+            book.setPrice(29.99);
+            book.setAuther(autherService.findById(1L));
 
-        Book book2 = new Book();
-        book2.setName("Java in Action");
-        book2.setPrice(39.99);
-        book2.setAuther(autherService.findById(2L));
+            Book book2 = new Book();
+            book2.setName("Java in Action");
+            book2.setPrice(39.99);
+            book2.setAuther(autherService.findById(2L));
 
-        bookService.saveAll(Arrays.asList(book,book2));
+            bookService.saveAll(Arrays.asList(book,book2));
+        }
+
     }
 }
